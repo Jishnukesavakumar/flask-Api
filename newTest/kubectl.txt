@@ -1,0 +1,53 @@
+
+
+kubectl
+https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+
+move exe file to desired folder and
+
+add the path to env var
+
+
+minikube
+
+https://github.com/kubernetes/minikube/releases
+download and move the exe file to same folder as kubectl
+rename the file to minikube.exe
+
+
+create deployment.yaml file
+--cd to yaml file path
+kubectl apply -f deployment.yaml
+
+
+--port forwarding
+> kubectl get pods
+
+---output---
+NAME                              READY   STATUS    RESTARTS   AGE
+flask-test-app-7ff886f4dd-72glb   1/1     Running   0          16m
+flask-test-app-7ff886f4dd-7jdjl   1/1     Running   0          16m
+flask-test-app-7ff886f4dd-p9gxb   1/1     Running   0          16m
+flask-test-app-7ff886f4dd-pd4sd   1/1     Running   0          16m
+flask-test-app-7ff886f4dd-sn222   1/1     Running   0          16m
+
+
+>kubectl port-forward flask-test-app-7ff886f4dd-72glb 5001:5001
+
+--output--
+Forwarding from 127.0.0.1:5001 -> 5001
+Forwarding from [::1]:5001 -> 5001
+Handling connection for 5001
+
+
+---Delete pods
+--get deployments
+>kubectl get deploy
+
+---output----
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+flask-test-app   5/5     5            5           15m
+
+--delete pod
+>kubectl delete deployment flask-test-app
+
